@@ -1,11 +1,11 @@
 const express = require('express');
-const rescue = require('express-rescue');
 const routerProduct = require('./routes/productRoute');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 
 const app = express();
 
-app.use('/products', rescue(routerProduct));
+app.use(express.json());
+app.use('/products', routerProduct);
 app.use(errorMiddleware);
 
 // não remova esse endpoint, é para o avaliador funcionar

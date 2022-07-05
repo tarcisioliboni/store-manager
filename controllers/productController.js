@@ -11,10 +11,20 @@ const getById = async (req, res) => {
   if (message) {
     return res.status(statusCode).json({ message });
   }
-  res.status(statusCode).json(product);
+  return res.status(statusCode).json(product);
+};
+
+const addProduct = async (req, res) => {
+  const { name } = req.body;
+  const { product, statusCode, message } = await productService.addProduct(name);
+  if (message) {
+    return res.status(statusCode).json({ message });
+  }
+  return res.status(statusCode).json({ id: product.id, name });
 };
 
 module.exports = {
   getAll,
   getById,
+  addProduct,
 };
