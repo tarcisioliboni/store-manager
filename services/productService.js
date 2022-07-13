@@ -29,8 +29,20 @@ const addProduct = async (name) => {
   return { statusCode: 201, product: { id } };
 };
 
+const removeProduct = async (id) => {
+  const isProductFound = await productModel.getById(id);
+  if (!isProductFound) {
+    return {
+      statusCode: 404,
+      message: 'Product not found',
+    };
+  }  
+  await productModel.removeProduct(id);
+  return { statusCode: 204, data: '' };
+};  
 module.exports = {
   getAll,
   getById,
   addProduct,
+  removeProduct,
 };
